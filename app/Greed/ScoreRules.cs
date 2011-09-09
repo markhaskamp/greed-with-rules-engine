@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Greed
 {
@@ -9,19 +8,15 @@ namespace Greed
         public abstract IList<int> resetDice(IList<int> dice);
 
         public IList<int> RemoveThreeOf(int die, IList<int> dice) {
-            IList<int> foo = new List<int>() {die, die, die};
-            
-            foreach (var i in foo) {
-                dice.Remove(i);
+            for (int i = 0; i < 3; i++) {
+                dice.Remove(die);
             }
 
             return (dice);
         }
 
         public static IList<int> RemoveOneOf(int die, IList<int> dice) {
-            IList<int> foo = new List<int>() { die };
-
-            dice.Remove(foo[0]);
+            dice.Remove(die);
             return dice;
         }
     }
@@ -46,7 +41,6 @@ namespace Greed
         public override IList<int> resetDice(IList<int> dice) {
             return RemoveThreeOf(1, dice);
         }
-
     }
 
     public class ThreeOfAKind : AbstractScoreRules
