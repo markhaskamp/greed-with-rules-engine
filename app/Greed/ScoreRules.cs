@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Greed
 {
@@ -8,33 +9,20 @@ namespace Greed
         public abstract IList<int> resetDice(IList<int> dice);
 
         public IList<int> RemoveThreeOf(int die, IList<int> dice) {
-            IList<int> returnArray = new List<int>();
-
-            int onesCount = 0;
-            for (int ndx = 0; ndx < dice.Count; ndx++) {
-                if (dice[ndx] == die) {
-                    onesCount++;
-                    if (onesCount > 3) {
-                        returnArray.Add(dice[ndx]);
-                    }
-                }
-                else {
-                    returnArray.Add(dice[ndx]);
-                }
+            IList<int> foo = new List<int>() {die, die, die};
+            
+            foreach (var i in foo) {
+                dice.Remove(i);
             }
 
-            return returnArray;
+            return (dice);
         }
 
         public static IList<int> RemoveOneOf(int die, IList<int> dice) {
-            for (int ndx = 0; ndx < dice.Count; ndx++) {
-                if (dice[ndx] == die) {
-                    dice.RemoveAt(ndx);
-                    return dice;
-                }
-            }
-            throw (new Exception
-                (string.Format("one die of {0} doesn't exist in array.", die)));
+            IList<int> foo = new List<int>() { die };
+
+            dice.Remove(foo[0]);
+            return dice;
         }
     }
 
