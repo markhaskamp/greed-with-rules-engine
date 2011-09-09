@@ -9,12 +9,7 @@ namespace Greed
         public abstract IList<int> resetDice(IList<int> dice);
 
         public IList<int> RemoveThreeOf(int die, IList<int> dice) {
-            IList<int> foo = new List<int>() {die, die, die};
-            
-            foreach (var i in foo) {
-                dice.Remove(i);
-            }
-
+            dice.RemoveFirst(x => x == 1, 3);     // doesn't compile
             return (dice);
         }
 
