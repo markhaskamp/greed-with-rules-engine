@@ -1,15 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Greed
 {
+    public static class Util
+    {
+        public static void RemoveFirst<T>(this IList<T> list, Expression<Func<T,bool>> predicate, int numberToRemove)
+        {
+            var filtered_list = list.AsQueryable().Where(predicate).Take(numberToRemove).ToList();
+            foreach (var item in filtered_list)
+            {
+                list.Remove(item);
+            }
+        }
+        
+    }
     public abstract class AbstractScoreRules {
         public abstract int Score();
         public abstract IList<int> resetDice(IList<int> dice);
 
         public IList<int> RemoveThreeOf(int die, IList<int> dice) {
-            dice.RemoveFirst(x => x == 1, 3);     // doesn't compile
+            dice.RemoveFirst(x => x == die, 3);
             return (dice);
         }
 
@@ -19,6 +32,7 @@ namespace Greed
             dice.Remove(foo[0]);
             return dice;
         }
+
     }
 
     public class NoDice : AbstractScoreRules
