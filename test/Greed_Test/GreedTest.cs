@@ -16,7 +16,7 @@ namespace Greed_Test
 
         [Test]
         public void When_A_Single_Five_Then_Scorer_Returns_50() {
-            IList<int> dice = new List<int>() {5 };
+            IList<int> dice = new List<int>() {5};
             int score = Greed.Greed.Score(dice);
             Assert.AreEqual(50, score);
         }
